@@ -5,11 +5,11 @@
 
 **그.치.만.** 이러한 ~~(나 같은)~~ vscode가 없으면 안되는 개발자들을 위해 당연히 extension이 존재한다. 두둥. 바로바로 **wsl extension!**
 
-![image](/hello.png)
+![image](https://github.com/euncharm1ng/introducing_wsl/blob/main/hello.PNG)
 
 이 extension을 사용하면 바로 vscode에서 linux에 접속할 수 있다는 놀라운 사실.
 
-![image](\hello2.png)
+![image](https://github.com/euncharm1ng/introducing_wsl/blob/main/hello2.PNG)
 
 설치는 extensions 텝에서 wsl을 찾아서 메뉴얼을 보고 하시라... 
 
