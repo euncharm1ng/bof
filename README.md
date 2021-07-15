@@ -1,22 +1,18 @@
-# introducing WSL (Windows Subsystem for Linux) extension for vscode
->윈도우에서 리눅스를 사용하는 방법은 이미 docker나 ubuntu를 설치함으로써 사용가능한 것을 잘 알고있을 것이다. 하지만 인간이란 서있으면 앉고 싶고, 앉아있으면 눕고 싶은 존재들이라 이 window에 깔려있는 linux를 더 편하게 사용하는 방법을 알아보겠다. 
+# write-up
+## bof3
+![image](1.png)
+![image](2.png)
+![image](3.png)
+key가 0x61인것을 확인해서 버퍼에 의미 없는 값을 씌우고 그 위에 있는 innocent에 0x61을 씌어주면 된다. 먼저 gdb를 활용해서 통 0x90 바이트만큼의 공간 즉 144 바이트만큼의 공간이 생긴 것을 확인할 수 있고 중간에 144 - 128 - 4 = 12 바이트만큼의 더미가 생긴 것을 확인 할 수 있다. 이번에는 innocent가 제일 뒤에 있어서 141개의 a만 출력한다면 됐지만 이가 안통할 수 있으니 4바이트씩 줄이면서 innocent에 맞춰야할 수도 있다. 
 
-리눅스를 위도우에 깔아서 사용할 때 보통 command line shell을 통해서 진행을 하기 때문에 코딩을 vim 또는 nano로 진행을 할 수 밖에 없다. 하지만 이미 vscode에 길들여진 현대의 개발자에게 vim에 적응하는 기간은 너무나도 험난한 가시밭길일 수 밖에 없다. ㅠㅠㅜㅠㅜ ~~(vim이 가시밭길처럼 느껴지는 사람 일단 나 ㅠㅠ)~~
+## bof4
+![image](4.png)
+![image](5.png)
+![image](6.png)
+이번에는 key가 0x12345678이다 이 또한 위에서 했던 접근 방식으로 점근이 가능하다 다만 int인 innocent는 little endian방식으로 되어있어서 \x78\x56\x34\x12의 방식으로 들어가야 이를 0x12345678로 읽는다. 이것만 주의하면 bof3과 똑같은 문제이다. 총 0xa0 즉 160 바이트가 생긴것을 확인할 수 있었고 계한하기 귀찮으니 4바이트인 \x78\x56\x34\x12를 40번 반복해 160바이트를 다 채워 innocent를 덮어주는 방식으로 했다. 
 
-**그.치.만.** 이러한 ~~(나 같은)~~ vscode가 없으면 안되는 개발자들을 위해 당연히 extension이 존재한다. 두둥. 바로바로 **wsl extension!**
-
-![image](https://github.com/euncharm1ng/introducing_wsl/blob/main/hello.PNG)
-
-이 extension을 사용하면 바로 vscode에서 linux에 접속할 수 있다는 놀라운 사실.
-
-![image](https://github.com/euncharm1ng/introducing_wsl/blob/main/hello2.PNG)
-
-설치는 extensions 텝에서 wsl을 찾아서 메뉴얼을 보고 하시라... 
-
-~~(너무 오래전에 설치해서 방법은 기억이 안나는데 조금 복잡했던 거 같기도 하고...)~~
-
-좌측 사이드바를 보면 리눅스에 전체적인 디랙토리가 다 보이고 우측 상단에는 너무나도 익숙한 vscode의 화면이 우측 하단에는 command line이 존재한다. 
-
-이후에 리눅스 환경에서 작업을 해야될 때가 올텐데 이런 것들을 알아두면 너무나도 편하게 작업을 할 수 있다는 사실! ~~(학교 peace서버가 자주 터저서 과제를 작성하지 못하는 불상사는 일단 피하는 것으로 어마어마한 이득!)~~
-
-고로 여러분 모두모두 wsl extension을 쓰세요!
+## bof5
+![image](7.png)
+![image](8.png)
+![image](9.png)
+이 문제같은 경우에는 buf에 들어간 스트링으로 system call을 진행하기 떄문에 입력할 때 "/bin/bash"를 넣어주고 innocent를 key값으로 맞춰주면 된다. 위에서 했던 방식과 같지만 앞에 /bin/bash를 넣고 그만큼의 바이트를 뺀 뒤 \x78\x56\x34\x12를 넣어줘서 key에 맞추는 방식으로 문제를 해결했다. 
