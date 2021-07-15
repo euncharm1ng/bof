@@ -1,8 +1,8 @@
 # write-up
 ## bof3
-![image](/1.png)
-![image](./2.png)
-![image](3.png)
+![image](https://github.com/euncharm1ng/introducing_wsl/blob/main/1.PNG)
+![image](./2.PNG)
+![image](3.PNG)
 key가 0x61인것을 확인해서 버퍼에 의미 없는 값을 씌우고 그 위에 있는 innocent에 0x61을 씌어주면 된다. 먼저 gdb를 활용해서 통 0x90 바이트만큼의 공간 즉 144 바이트만큼의 공간이 생긴 것을 확인할 수 있고 중간에 144 - 128 - 4 = 12 바이트만큼의 더미가 생긴 것을 확인 할 수 있다. 이번에는 innocent가 제일 뒤에 있어서 141개의 a만 출력한다면 됐지만 이가 안통할 수 있으니 4바이트씩 줄이면서 innocent에 맞춰야할 수도 있다. 
 
 ## bof4
